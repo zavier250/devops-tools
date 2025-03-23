@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e  # Exit immediately if a command fails
+
+# Define Terraform directory
+TERRAFORM_DIR="$HOME/projects/devops-tools/terraform/jenkins-server"
+
+# Move into the Terraform directory
+if [ ! -d "$TERRAFORM_DIR" ]; then
+    echo "Error: Terraform directory not found at $TERRAFORM_DIR"
+    exit 1
+fi
+cd "$TERRAFORM_DIR"
+
+# Run Terraform commands
+echo "🚀 Initializing Terraform..."
+terraform init
+
+echo "🚀 Deploying Jenkins instance..."
+terraform apply -auto-approve
+
+# Fetch Jenkins Public IP
+JENKINS_IP=$(terraform output -raw jenkins_public_ip)
+
+if [[ -z "$JENKINS_IP" ]]; then
+    echo "❌ Failed to retrieve Jenkins public IP."
+    exit 1
+fi
+
+echo "✅ Jenkins instance created successfully!"
+echo "🌍 Access Jenkins at: http://$JENKINS_IP:8080"
+echo "🔑 Retrieve initial admin password with:"
+echo "   ssh -i your-key.pem ubuntu@$JENKINS_IP"
+echo "   sudo cat /var/lib/jenkins/secrets/initialAdminPassword"
+

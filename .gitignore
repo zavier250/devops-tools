@@ -1,0 +1,43 @@
+# Local .terraform directories
+**/.terraform/*
+!.terraform/modules      # optional: keep module source structure if needed
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+*.tfplan
+
+# Terraform variable files (may contain secrets)
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# MacOS / Linux system files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+.idea/
+.vscode/
+
+# Node/npm (if frontend included)
+node_modules/
+
+# Zip and artifact files
+*.zip
+*.tar.gz
