@@ -1,6 +1,6 @@
 resource "aws_security_group" "node_be_sg" {
   name        = "node_be-sg"
-  description = "Allow SSH and node_fe UI"
+  description = "Allow SSH and node_be API"
 
   ingress {
     from_port   = 22
